@@ -7,3 +7,5 @@
 *.css text eol=lf
 *.coffee text eol=lf
 *.html text eol=lf
+*.png binary
+*.jpg binary
