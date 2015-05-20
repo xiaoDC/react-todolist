@@ -1,0 +1,25 @@
+{
+  "name": "raect-tolist",
+  "version": "1.0.0",
+  "description": "it is a project tolist with using react, gulp and coffescript",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "gulp",
+    "coffee",
+    "coffeescript"
+  ],
+  "author": "chenglong",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^3.8.11"
+  },
+  "devDependencies": {
+    "browserify": "^10.2.0",
+    "gulp-coffee": "^2.3.1",
+    "gulp-util": "^3.0.4"
+  }
+}
