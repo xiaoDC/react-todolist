@@ -12,18 +12,22 @@ gulp.task 'coffee', ->
 gulp.task 'browserify', ->
     browserify = require 'browserify'
     source = require 'vinyl-source-stream'
-    browserify './src/js/b.js'
+    browserify './src/js/app.js'
     .bundle()
     .pipe source 'app.js'
     .pipe gulp.dest './build/js/'
 
-    # browserify 'src/js/*.js'
-    # gulp
-    # .src 'src/js/*.js'
-    # .pipe browserify 'src/js/*.js'
-    # .pipe gulp.dest './build/js'
 
-gulp.task 'default', ['coffee', 'browserify']
+gulp.task 'reactify', ->
+    react = require 'gulp-react'
+    rename = require 'gulp-rename'
+    gulp.src './src/js/b.js'
+    .pipe react()
+    .pipe rename 'app.js'
+    .pipe gulp.dest './src/js/'
+
+
+gulp.task 'default', ['coffee', 'reactify', 'browserify']
 #gulp.task 'default', ['coffee']
 
 
