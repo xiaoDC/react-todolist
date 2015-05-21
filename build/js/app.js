@@ -1,25 +1,15 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var HelloMessage, Person, React, chenglong, name;
+var HelloMessage, app;
 
-Person = require('./main');
+HelloMessage = require('./b');
 
-chenglong = new Person('chenglong', 24);
+app = {
+  HelloMessage: HelloMessage
+};
 
-name = chenglong.getName();
+window.app = app;
 
-console.log(name);
-
-React = require('./react');
-
-HelloMessage = React.createClass({displayName: "HelloMessage",
-  render: function() {
-    return React.createElement("div", null, "Hello ", this.props.name);
-  }
-});
-
-React.render(React.createElement(HelloMessage, {name: "John"}), document.getElementById('test'));
-
-},{"./main":158,"./react":159}],2:[function(require,module,exports){
+},{"./b":158}],2:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -19830,33 +19820,18 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":30}],158:[function(require,module,exports){
-var Person;
+var HelloMessage, React;
 
-Person = (function() {
-  function Person(name, age) {
-    this.name = name;
-    this.age = age;
+React = require("react");
+
+HelloMessage = React.createClass({displayName: "HelloMessage",
+  render: function() {
+    return React.createElement("div", null, "Hello ", this.props.name);
   }
+});
 
-  Person.prototype.getName = function() {
-    return this.name;
-  };
+React.render(React.createElement(HelloMessage, {name: "John"}), document.getElementById('test'));
 
-  Person.prototype.setName = function(name) {
-    return this.name = name;
-  };
-
-  return Person;
-
-})();
-
-module.exports = Person;
-
-},{}],159:[function(require,module,exports){
-var React;
-
-React = require('react');
-
-module.exports = React;
+module.exports = HelloMessage;
 
 },{"react":157}]},{},[1]);

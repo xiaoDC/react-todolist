@@ -17,5 +17,3 @@ Person = (function() {
   return Person;
 
 })();
-
-module.exports = Person;

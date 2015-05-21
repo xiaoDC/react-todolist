@@ -1,47 +1,48 @@
-gulp = require 'gulp'
+gulp = require "gulp"
 
-gulp.task 'default', ['uglify_js']
+srcDir =
+    coffee: "./src/coffee/"
+    js: "./src/js/"
+    scss: "./src/scss/"
+    css: "./src/css/"
 
-gulp.task 'uglify_js', ['browserify_js'], ->
-    uglify = require 'gulp-uglify'
-    rename = require 'gulp-rename'
+destDir =
+    js: "./build/js/"
+    css: "./build/css/"
+
+gulp.task "default", ["uglify_js"]
+
+
+gulp.task "uglify_js", ["browserify_js"], ->
+    uglify = require "gulp-uglify"
+    rename = require "gulp-rename"
 
     gulp
-    .src './build/js/app.js'
+    .src "#{destDir.js}app.js"
     .pipe uglify()
-    .pipe rename 'app.min.js'
-    .pipe gulp.dest './build/js/'
+    .pipe rename "app.min.js"
+    .pipe gulp.dest "#{destDir.js}"
 
 
-gulp.task 'browserify_js', ['reactify_js'], ->
-    browserify = require 'browserify'
-    source = require 'vinyl-source-stream'
+gulp.task "browserify_js", ["reactify_js"], ->
+    browserify = require "browserify"
+    source = require "vinyl-source-stream"
 
-    browserify './src/js/app.js'
+    browserify "#{srcDir.js}app.js"
     .bundle()
-    .pipe source 'app.js'
-    .pipe gulp.dest './build/js/'
+    .pipe source "app.js"
+    .pipe gulp.dest "#{destDir.js}"
 
 
-# react js
-gulp.task 'reactify_js', ['coffee2js'], ->
-    react = require 'gulp-react'
-    rename = require 'gulp-rename'
-
-    gulp
-    .src './src/js/b.js'
-    .pipe react()
-    .pipe rename 'app.js'
-    .pipe gulp.dest './src/js/'
-
-
-
-gulp.task 'coffee2js', ->
-    coffee = require 'gulp-coffee'
-    gutil = require 'gulp-util'
+# compile coffee, then react js
+gulp.task "reactify_js", ->
+    react = require "gulp-react"
+    gutil = require "gulp-util"
+    coffee = require "gulp-coffee"
 
     gulp
-    .src './src/coffee/*.coffee'
+    .src "#{srcDir.coffee}*.coffee"
     .pipe coffee bare: true
-    .on 'error', gutil.log
-    .pipe gulp.dest './src/js/'
+    .on "error", gutil.log
+    .pipe react()
+    .pipe gulp.dest "#{srcDir.js}"

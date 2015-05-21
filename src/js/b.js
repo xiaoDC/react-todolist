@@ -1,19 +1,13 @@
-var HelloMessage, Person, React, chenglong, name;
+var HelloMessage, React;
 
-Person = require('./main');
+React = require("react");
 
-chenglong = new Person('chenglong', 24);
-
-name = chenglong.getName();
-
-console.log(name);
-
-React = require('./react');
-
-HelloMessage = React.createClass({
+HelloMessage = React.createClass({displayName: "HelloMessage",
   render: function() {
-    return <div>Hello {this.props.name}</div>;
+    return React.createElement("div", null, "Hello ", this.props.name);
   }
 });
 
-React.render(<HelloMessage name="John" />, document.getElementById('test'));
+React.render(React.createElement(HelloMessage, {name: "John"}), document.getElementById('test'));
+
+module.exports = HelloMessage;
